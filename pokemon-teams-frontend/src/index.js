@@ -59,8 +59,6 @@ function makeSinglePokemon(pokemon) {
 }
 
 function addPokemonToTrainer(event) {
-   //Only add to trainer if he doesn't have all his slots filled up -- so do it if trainerPokemonsArr.length <(8?) else do nothing. 
-   //need to figure out the trainer's id -- go up three elements to get the div class="card" which contains the trainer attribute
    const trainerCard = this.parentElement
    const trainerId = trainerCard.getAttribute("data-id")
    const trainerPokemonsUl = trainerCard.getElementsByTagName("ul")[0]
@@ -96,8 +94,6 @@ function addPokemonToTrainer(event) {
 }
 
 function releasePokemonFromTrainer(event) {
-   //Only add to trainer if he doesn't have all his slots filled up -- so do it if trainerPokemonsArr.length <(8?) else do nothing. 
-   //need to figure out the trainer's id -- go up three elements to get the div class="card" which contains the trainer attribute
    
    const trainerCard = this.parentElement.parentElement.parentElement
    const trainerId = trainerCard.getAttribute("data-id")
