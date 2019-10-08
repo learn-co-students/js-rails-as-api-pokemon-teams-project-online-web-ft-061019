@@ -26,19 +26,22 @@ organizer where we can add and remove Pokemon as needed:
 
 Although we have not explicitly gone over some of the CRUD actions involved in
 adding and deleting relationships in this section of content, refer back to what
-you learned about CRUD actions in Rails and use your new understanding of 
+you learned about CRUD actions in Rails and use your new understanding of
 rendering JSON to try and solve these challenges.
 
 ## Goals
 
-**Note:** There are no tests in this lesson so running the `learn` command will not work. Rather, your 
-task is to build towards the goals below by constructing both a Rails API and JavaScript frontend together. 
-The specific implementation for achieving these goals is left to you.
+**Note:** There are no tests in this lesson so running the `learn` command will
+not work. Rather, your task is to build towards the goals below by constructing
+both a Rails API and JavaScript frontend together. The specific implementation
+for achieving these goals is left to you.
 
-- When a user loads the page, they should see all trainers, with their current team of Pokemon.
-- Whenever a user hits "Add Pokemon" and they have space on their team, they should get a new Pokemon.
-- Whenever a user hits "Release Pokemon" on a specific Pokemon team, that specific Pokemon should be 
-released from the team.
+- When a user loads the page, they should see all trainers, with their current
+  team of Pokemon.
+- Whenever a user hits "Add Pokemon" and they have space on their team, they
+  should get a new Pokemon.
+- Whenever a user hits "Release Pokemon" on a specific Pokemon team, that
+  specific Pokemon should be released from the team.
 
 ## Backend
 
@@ -59,8 +62,8 @@ gem 'faker'
 
 While we are in the Gemfile, uncomment `gem 'rack-cors'`, then run 
 `bundle install`. If you recall, `rack-cors` is necessary for cross-origin
-resource sharing. To get rack-cors working, once the gem is installed, uncomment the
-following code in `config/initializers/cors.rb`:
+resource sharing. To get rack-cors working, once the gem is installed, uncomment
+the following code in `config/initializers/cors.rb`:
 
 ```rb
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
@@ -72,14 +75,19 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
-
 ```
-The string after `origins` specifies which hosts will be allowed to make requests
-to your API. Your brand-new rails app probably comes with the string `"example.com"` there
-— change it to "*" to allow all hosts. In a production application, you might 
-want to specify a particular hostname.
 
-If you already have a rails server running, stop and restart it so that your 
+> **Aside**: Notice that we've put this in `config/initializers/cors.rb`. We've
+also seen this code being placed in `config/application.rb`. Both will work, but
+Rails provides the `cors.rb` file specifically for defining our rules for
+cross-origin HTTP requests.
+
+The string after `origins` specifies which hosts will be allowed to make
+requests to your API. Your brand-new rails app probably comes with the string
+`"example.com"` there — change it to "*" to allow all hosts. In a production
+application, you might want to specify a particular hostname.
+
+If you already have a rails server running, stop and restart it so that your
 configuration changes can take effect.
 
 With these gems installed, use the following resource generators to create
@@ -105,14 +113,15 @@ Trainer.delete_all
 Pokemon.delete_all
 
 trainers_name = [
+  'Natalie',
   'Prince',
   'Dick',
+  'Rachel',
   'Garry',
   'Jason',
   'Matt',
-  'Noah',
-  'Adam',
-  'Arthur'
+  'Niky',
+  'Ashley'
 ]
 
 trainer_collection = []
@@ -142,7 +151,7 @@ an HTML, CSS and JS file set up to work together.
 
 ### Suggested HTML
 
-As CSS is already provided, you can use this example HTML as a guide when
+As CSS is already provided, you can use this sample HTML as a guide when
 building out your frontend JavaScript:
 
 ```html
@@ -161,14 +170,18 @@ building out your frontend JavaScript:
 ### Building out the rest of the project
 
 Remember that your user stories are:
-- When a user loads the page, they should see all trainers, with their current team of Pokemon.
-- Whenever a user hits "Add Pokemon" and they have space on their team, they should get a new Pokemon.
-- Whenever a user hits "Release Pokemon" on a specific Pokemon team, that specific Pokemon should be
-released from the team.
 
-You should build out just enough of your Rails API to achieve the above. You _should not_ build out full
-CRUD on each model. For example, the frontend will not have the ability to create a new Trainer, so your
-backend should not have a `POST /trainers` route.
+- When a user loads the page, they should see all trainers, with their current
+  team of Pokemon.
+- Whenever a user hits "Add Pokemon" and they have space on their team, they
+  should get a new Pokemon.
+- Whenever a user hits "Release Pokemon" on a specific Pokemon team, that
+  specific Pokemon should be released from the team.
+
+You should build out just enough of your Rails API to achieve the above. You
+_should not_ build out full CRUD on each model. For example, the frontend will
+not have the ability to create a new Trainer, so your backend should not have a
+`POST /trainers` route.
 
 ## Example API Requests
 
@@ -207,8 +220,10 @@ GET /trainers
 ```
 
 ### Adding a Pokemon
-* Note: When adding a new pokemon, the nickname should be generated using the `Faker::Name` gem and the
-species should be generated using the `Faker::Games::Pokemon` gem. See the seeds.rb file above as an example.
+
+* Note: When adding a new pokemon, the nickname should be generated using the
+  `Faker::Name` gem and the species should be generated using the
+  `Faker::Games::Pokemon` gem. See the seeds.rb file above as an example.
 
 ```text
 #=> Example Request
