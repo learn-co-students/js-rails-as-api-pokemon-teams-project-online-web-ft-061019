@@ -1,7 +1,7 @@
 class TrainersController < ApplicationController
     def index
         trainers = Trainer.all
-        render json: { trainers: trainers, messages: ['Hello Birds', 'Goodbye Birds'] }
+        render json: trainers, include: [:pokemons]
     end
 
     def show
