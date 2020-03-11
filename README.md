@@ -149,6 +149,29 @@ have populated your tables with seed data.
 Some basic structure is provided in the folder `pokemon-teams-frontend`, including
 an HTML, CSS and JS file set up to work together.
 
+## Running the Server
+
+The API server should be started by accessing the folder pokemon-teams-backend (`cd pokemon-teams-backend`) and running `rails s` from a terminal window. It should run on port :3000 since the `pokemon-teams-frontend/src/index.js` file has a constant `BASE_URL` setup to use that port.
+
+If for any reason you had to quit the running server and have to restart it, you might see an error saying **port 3000 already in use**. In this case, do the following:
+
+Run `lsof -i :3000` to inspect what's running on port 3000 (alternatively, you can try `ps aux | grep 3000`).
+You will see something like the following:
+```
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME 
+ruby 9639 matteo 28u IPv4 0x89939df84558ba7 0t0 TCP localhost:hbci (LISTEN) 
+ruby 9639 matteo 29u IPv6 0x89939dfa2ef1897 0t0 TCP localhost:hbci (LISTEN)
+```
+
+Kill the process running by doing `kill -9 <PID_HERE>`, so in the case of my example `kill -9 9639`.
+Now the `rails s` command should start the server on port 3000 without issues.
+
+> **Aside**: In general, you can always specify what port to use when running the server, by running: `rails s -p PORT_NUMBER` (eg: `rails s -p 3001`).
+
+The frontend should be started by accessing the folder pokemon-teams-frontend (`cd pokemon-teams-frontend`) and, in a new terminal window, run `open index.html` or simply right-click on the file name and select `open in browser` if this option is available.
+
+**Keep the rails server running since our frontend will fire requests to our backend API in order to retrieve the existing Trainers and Pokemons, as well as performing other actions like creating and deleting Pokemons.**
+
 ### Suggested HTML
 
 As CSS is already provided, you can use this sample HTML as a guide when
